@@ -4,9 +4,13 @@
 # configurations for the database connection
 spring:
   datasource:
-    url:  jdbc:mysql://localhost:3306/micro-bank?createDatabaseIfNotExist=true&userSSL=false&serverTimezone=UTC
-    username:  root
-    password:  P@ssw0rd
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+#    url:  jdbc:mysql://localhost:3306/micro-bank?createDatabaseIfNotExist=true&userSSL=false&serverTimezone=UTC
+#    username:  root
+#    password:  P@ssw0rd
   jpa:
     show-sql:  true
     hibernate:

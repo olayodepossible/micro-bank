@@ -1,0 +1,13 @@
+loan:
+  msg: Welcome to E-bank Account dev Application
+  build-version: 1
+  mail-details:
+    hostName: dev-accounts@e-bank.com
+    port: 9031
+    from: dev-accounts@e-bank.com
+    subject: Your Account details from e-banking dev env
+
+  active-branches:
+    - Atlanta
+    - London
+    - Washington

@@ -1,0 +1,13 @@
+loan:
+  msg: Welcome to E-bank Account prod Application
+  build-version: 1
+  mail-details:
+    hostName: prod-accounts@e-bank.com
+    port: 9033
+    from: prod-accounts@e-bank.com
+    subject: Your Account details from e-banking prod env
+
+  active-branches:
+      - Mumbai
+      - London
+      - Texas

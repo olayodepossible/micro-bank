@@ -3,6 +3,8 @@
 # ===============================
 # configurations for the database connection
 spring:
+  application:
+    name: accounts
   h2:
     console:
       enabled: true
@@ -18,12 +20,47 @@ spring:
   jpa:
     show-sql:  true
     database-platform: org.hibernate.dialect.H2Dialect
+  profiles:
+    active: dev
+  config:
+    import: optional:configserver:http://localhost:8072/
 #    hibernate:
 #      ddl-auto: create
 #
 #      # Allows Hibernate to generate SQL optimized for a particular DBMS
 #    properties:
 #      hibernate:
-##        dialect:  org.hibernate.dialect.MySQL5InnoDBDialect
+#        dialect:  org.hibernate.dialect.MySQL5InnoDBDialect
 server:
   port: 8082
+
+#  registration with Eureka
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8085/eureka/
+
+
+info:
+  app:
+    name: Accounts Microservice
+    description: E-banking Account Application
+    version: 1.0.0
+
+
+endpoints:
+  shutdown:
+    enabled: true
+
+management:
+  endpoint:
+    shutdown:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'

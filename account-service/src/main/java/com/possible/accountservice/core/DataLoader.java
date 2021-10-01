@@ -1,5 +1,6 @@
 package com.possible.accountservice.core;
 
+import com.possible.accountservice.config.AccountServiceConfig;
 import com.possible.accountservice.model.AccountType;
 import com.possible.accountservice.model.Accounts;
 import com.possible.accountservice.model.Customer;
@@ -7,6 +8,8 @@ import com.possible.accountservice.model.Gender;
 import com.possible.accountservice.repository.CustomerRepository;
 import com.possible.accountservice.services.AccountService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -17,13 +20,18 @@ import java.util.Random;
 import java.util.stream.IntStream;
 
 @Component
+@Slf4j
 @RequiredArgsConstructor
 public class DataLoader implements ApplicationRunner {
     private final CustomerRepository customerRepository;
     private final AccountService accountService;
 
+
+    private final AccountServiceConfig config;
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
+        log.info("Message from config server >>>> {}", config.getMsg());
         String [] firstNames = {"Roy %s ", "%s jackson", "Michael %s", "David %s"};
         String [] lastNames = {"Homey", "Janet ", "Owen", "Smith"};
         String [] addresses1 = {"123, Homey %s", "4, Johnson %s", "%s 12, Owen", "565, Smith %s"};

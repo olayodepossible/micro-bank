@@ -1,0 +1,13 @@
+account:
+  msg: Welcome to E-bank Account default Application
+  build-version: 2
+  mail-details:
+    hostName: default-accounts@e-bank.com
+    port: 9000
+    from: default-accounts@e-bank.com
+    subject: Your Account details from e-banking env
+
+  active-branches:
+    - Mumbai
+    - London
+    - Washington

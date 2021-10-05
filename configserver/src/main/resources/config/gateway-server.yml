@@ -1,0 +1,12 @@
+server:
+  port: 8095
+
+#  registration with Eureka
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8085/eureka/

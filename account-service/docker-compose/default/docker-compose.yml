@@ -10,6 +10,26 @@ services:
     networks:
       - e-banking
 
+  eurakaserver:
+    image: possible/eureka-service
+    mem_limit: 700m
+    ports:
+      - "8085:8085"
+    networks:
+      - e-banking
+    depends_on:
+      - configserver
+      -
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+    environment:
+      SPRING_PROFILE_ACTIVE: default
+      SPRING_CONFIG_IMPORT: configserver:http://configserver:8072
+
   accounts:
     image: possible/account-service
     mem_limit: 700m
@@ -19,7 +39,7 @@ services:
       -     e-banking
     depends_on:
       -     configserver
-      -
+      -     eurakaserver
     deploy:
       restart_policy:
         condition: on-failure
@@ -29,6 +49,7 @@ services:
     environment:
       SPRING_PROFILE_ACTIVE: default
       SPRING_CONFIG_IMPORT: configserver:http://configserver:8072
+      EUREKA_CLIENT_SERVICE_DEFAULTZONE: http://eurekaserver:8085/eureka/
 
   card:
     image: possible/card-service
@@ -38,8 +59,8 @@ services:
     networks:
       - e-banking
     depends_on:
-      - configserver
-      -
+      -     configserver
+      -     eurakaserver
     deploy:
       restart_policy:
         condition: on-failure
@@ -49,6 +70,7 @@ services:
     environment:
       SPRING_PROFILE_ACTIVE: default
       SPRING_CONFIG_IMPORT: configserver:http://configserver:8072
+      EUREKA_CLIENT_SERVICE_DEFAULTZONE: http://eurekaserver:8085/eureka/
 
   loan:
     image: possible/loan-service
@@ -58,8 +80,8 @@ services:
     networks:
       - e-banking
     depends_on:
-      - configserver
-      -
+      -     configserver
+      -     eurakaserver
     deploy:
       restart_policy:
         condition: on-failure
@@ -69,3 +91,4 @@ services:
     environment:
       SPRING_PROFILE_ACTIVE: default
       SPRING_CONFIG_IMPORT: configserver:http://configserver:8072
+      EUREKA_CLIENT_SERVICE_DEFAULTZONE: http://eurekaserver:8085/eureka/

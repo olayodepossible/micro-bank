@@ -1,0 +1,35 @@
+
+
+spring:
+    application:
+        name: gate-way-server
+    config:
+        import: optional:configserver:http://localhost:8072
+    cloud:
+        gateway:
+            discovery:
+                locator:
+                    enabled: true
+                    lower-case-service-id: true
+
+endpoints:
+    shutdown:
+        enabled: true
+
+info:
+    app:
+        name: Gate-way Server Microservice
+        description: E-banking Gate-way Server Application
+        version: 1.0.0
+
+management:
+    endpoint:
+        shutdown:
+            enabled: true
+    endpoints:
+        web:
+            exposure:
+                include: '*'
+
+
+

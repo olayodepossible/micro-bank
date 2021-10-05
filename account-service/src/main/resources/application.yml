@@ -64,3 +64,16 @@ management:
     web:
       exposure:
         include: '*'
+
+#        Circuit Breaker
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        registerHealthIndicator: true
+    instances:
+      detailsForCustomerSupportApp:
+        minimumNumberOfCalls: 5
+        failureRateThreshold: 50
+        waitDurationInOpenState: 30000
+        permittedNumberofCallsInHalfOpenState: 2

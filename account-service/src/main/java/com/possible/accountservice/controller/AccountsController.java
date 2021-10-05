@@ -3,6 +3,7 @@ package com.possible.accountservice.controller;
 import com.possible.accountservice.model.Accounts;
 import com.possible.accountservice.model.Customer;
 import com.possible.accountservice.services.AccountService;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ public class AccountsController {
     private final AccountService accountService;
 
     @GetMapping("/customer/{id}")
+//    @CircuitBreaker(name = "detailsForCustomerSupportApp")
     public ResponseEntity<List<Accounts>> getAccountDetails(@PathVariable Long id){
         List<Accounts> accounts = accountService.getAccountDetailsById(id);
         if (accounts.size() > 0){
